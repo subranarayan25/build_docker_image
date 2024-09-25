@@ -1,0 +1,18 @@
+FROM python:3.13.0rc2-alpine3.19
+
+RUN mkdir -p /services
+
+WORKDIR /services
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY helloworldservice.py .
+
+EXPOSE 8000
+
+ENV FLASK_APP=helloworldservice
+
+CMD [ "python", "helloworldservice.py" ]
+
